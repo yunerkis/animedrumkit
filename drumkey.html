@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anime Drum Kit</title>
+  <link rel="stylesheet" href="drum.css">
+</head>
+<body>
+
+  <h1>Anime Drum key</h1>
+
+  <div class="keys">
+    <div data-key="65" class="key one">
+      <kbd>A</kbd>
+      <span class="sound">Deja Vu</span>
+    </div>
+    <div data-key="83" class="key two">
+      <kbd>S</kbd>
+      <span class="sound">Tuturuu</span>
+    </div>
+    <div data-key="68" class="key three">
+      <kbd>D</kbd>
+      <span class="sound">Waaooo</span>
+    </div>
+    <div data-key="70" class="key four">
+      <kbd>F</kbd>
+      <span class="sound">Evangelion</span>
+    </div>
+    <div data-key="71" class="key five">
+      <kbd>G</kbd>
+      <span class="sound">Anime Yell!</span>
+    </div>
+    <div data-key="72" class="key six">
+      <kbd>H</kbd>
+      <span class="sound">Sugoii</span>
+    </div>
+    <div data-key="74" class="key seven">
+      <kbd>J</kbd>
+      <span class="sound">Come sweet death</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/deja-vu.mp3"></audio>
+  <audio data-key="83" src="sounds/tuturu_1.mp3"></audio>
+  <audio data-key="68" src="sounds/anime-wow-sound-effect_Q6Q4ech.mp3"></audio>
+  <audio data-key="70" src="sounds/neon-genesis-evangelion-op-full-hq-4.mp3"></audio>
+  <audio data-key="71" src="sounds/no-thank-u-anima-yell.mp3"></audio>
+  <audio data-key="72" src="sounds/sugoi-sugoi_sxGqDzI.mp3"></audio>
+  <audio data-key="74" src="sounds/tmpnqyam9hf.mp3"></audio>
+
+<script>
+  const removeTransition = (e) => {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
+
+  const playSound = (e) => {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+</script>
+
+
+</body>
+</html>
